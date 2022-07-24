@@ -1,18 +1,20 @@
-const productos = [{id:1,nombre:"Antull",imagen:"work-1.jpg"},{id:2,nombre:"Antull", imagen:"work-2.jpg"},{id:3,nombre:"Veo Veo",imagen:"work-3.jpg"},{id:4,nombre:"Veo Veo", imagen:"work-4.jpg"},{id:5,nombre:"Alexia", imagen:"work-5.jpg"},{id:6,nombre:"Alexia", imagen:"work-6.jpg"}];
+//First create courses
 
-let items = 2;
-let contenido= "";
+const course01 = 1000;
+const course02 = 1500;
+const course03 = 2000;
+// add iva
+const iva = (x) => { return (x * 0.21) + x };
 
-for(let producto of productos){
+// select course
+let producto = prompt("Seleccionar Promoción 1, 2 o 3");
 
-    contenido += "<div class='card col-md-4'>";
-    contenido += "<img src='img/" + producto.imagen + "' class='card-img-top' width='400' alt='" + producto.nombre + "'>"; 
-    contenido += "<div class='card-body'>";
-    contenido += "<p class='card-text'>" + producto.nombre + "</p>";
-    contenido += "</div>";
-    contenido += "</div>";
+// depending on selected course, add iva to the final price
 
-}
-
-document.getElementById("productos").innerHTML=contenido;
-console.log("Fin del programa!");                                 
+if (producto == 1){
+ alert ("Selección la promoción 1 su total a pagar es $: " + iva(course01));
+}else if (producto == 2){
+    alert ("Selección la promoción 2 su total a pagar es $: " + iva(course02));
+}else if (producto == 3){
+    alert ("Selección la promoción 3 su total a pagar es $: " + iva(course03));
+}                               
