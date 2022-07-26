@@ -1,20 +1,34 @@
-//First create courses
+//
+class Product {
+    constructor(name, price, image) {
+        this.name = name.toUpperCase();
+        this.price = parseFloat(price);
+        this.image = image;
+        this.sold = false;
+        this.iva = 1.21;
+    }
 
-const course01 = 1000;
-const course02 = 1500;
-const course03 = 2000;
-// add iva
-const iva = (x) => { return (x * 0.21) + x };
+    addIva() {
+        this.price = this.price * this.iva;
+    }
+}
 
-// select course
-let producto = prompt("Seleccionar Promoción 1, 2 o 3");
+const products = [];
+products.push(new Product("Curso 01", 1200, "img01.jpg"));
+products.push(new Product("Curso 02", 2000, "img02.jpg"));
+products.push(new Product("Curso 03", 1900, "img02.jpg"));
+console.log(products);
+let content = "";
 
-// depending on selected course, add iva to the final price
+for (const product of products) {
+    product.addIva();
+    console.log("Nombre: " + product.name + ", Precio: $" + product.price);
+    content += `<div>
+    <p>${product.name}<br>
+    <img src="img/${product.image}" alt="${product.name}" width="240"><br>
+    <b>$${product.price}</b></p>
+    </div>`;
+}
 
-if (producto == 1){
- alert ("Selección la promoción 1 su total a pagar es $: " + iva(course01));
-}else if (producto == 2){
-    alert ("Selección la promoción 2 su total a pagar es $: " + iva(course02));
-}else if (producto == 3){
-    alert ("Selección la promoción 3 su total a pagar es $: " + iva(course03));
-}                               
+console.log(content);
+document.getElementById("productos").innerHTML = content;
