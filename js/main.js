@@ -1,4 +1,3 @@
-//
 class Product {
     constructor(name, price, image) {
         this.name = name.toUpperCase();
@@ -31,4 +30,4 @@ for (const product of products) {
 }
 
 console.log(content);
-document.getElementById("productos").innerHTML = content;
+document.getElementById("Cursos").innerHTML = content;
