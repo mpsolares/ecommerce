@@ -38,9 +38,14 @@ const cart = [];
 // Creo las funciones agregar y eliminar cursos del carrito
 
 function addCourse(course){
-    cart.push(course);
-    console.log("Curso Agregado excitosamente");
-    console.log(cart);
+
+    if (course != undefined){
+        cart.push(course);
+        console.log("Curso Agregado excitosamente");
+        console.log(cart);
+    } else {
+            alert("Favor ingresar una opción valida");
+        }   
 }
 
 function erraseCourse(id){
