@@ -35,34 +35,34 @@ class Course{
 
 const cart = [];
 
-// Creo las funciones agregar y eliminar productos del carrito
+// Creo las funciones agregar y eliminar cursos del carrito
 
 function addCourse(course){
     cart.push(course);
-    console.log("Producto Agregado excitosamente");
+    console.log("Curso Agregado excitosamente");
     console.log(cart);
 }
 
 function erraseCourse(id){
     let pos = cart.indexOf((element) => element.id == id);
     cart.splice(pos, 1);
-    console.log("Producto Eliminado excitosamente");
+    console.log("Curso Eliminado excitosamente");
     console.log(cart);
 }
 
-// Funncion buscar el producto dentro del array y devolver el objeto segun su id
+// Funncion buscar el curso dentro del array y devolver el objeto segun su id
 
 function findCourse(id){
     return courses.find((element) => element.id == id);
 }
 
-// Agregar productos al carrito
+// Agregar curso al carrito
 
 function addCoursesToCart(){
-    let outMessage = "Seleccione el producto a agregar al carrito \n PARA TERMINAR PRESIONES CANCELAR \n\n"
+    let outMessage = "Seleccione el curso para agregar al carrito \n PARA TERMINAR PRESIONES CANCELAR \n\n"
 
     for (let course of courses){
-        outMessage += product.id + ". " + course.name + "   $" + course.price + "\n";
+        outMessage += course.id + ". " + course.name + "   $" + course.price + "\n";
     }
 
     let id_course = 0; //creo e inicializo la variable donde guardo la elección del usuario
@@ -93,7 +93,7 @@ function showCoursesToDiscard() {
     let outMessage = "";
 
     if (cart.length > 0) {
-        outMessage += product.id + ". " + course.name + "   $" + course.price + "\n"; 
+        outMessage += course.id + ". " + course.name + "   $" + course.price + "\n"; 
 
         let id_course = prompt(outMessage);
     
