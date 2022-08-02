@@ -80,8 +80,6 @@ function addCoursesToCart(){
 
             addCourse(course); //agrego al array del carrito el contenido de variable course del carrito
         }else{
-            let errorMessage = "Debe seleccionar una opción valida"
-            alert (errorMessage);
             break;
         }
     }
@@ -93,14 +91,18 @@ function showCoursesToDiscard() {
     let outMessage = "";
 
     if (cart.length > 0) {
-        outMessage += course.id + ". " + course.name + "   $" + course.price + "\n"; 
+       outMessage = "Selecciones el curso que quiera ELIMINAR. Pulse CANCELAR si no quiere eliminar ningun curso\n\n";
 
-        let id_course = prompt(outMessage);
-    
-        if (id_course != null){
-            id_course = parseInt (id_course);
-            erraseCourse(id_course);
+       for (let course of cart){
+        outMessage += course.id + ". " + course.name + "    $" + course.price + "\n";
+       }
+       let id_course = prompt(outMessage);
+       
+       if (id_course != null){
+        id_course = parseInt(id_course);
+        erraseCourse(id_course);
         }
+
         showCourseOnCart();
     }else {
         outMessage= "No Tiene Cursos en el Carrito";
