@@ -44,7 +44,7 @@ function addCourse(course){
 }
 
 function erraseCourse(id){
-    let pos = cart.indexOf((element) => element.id == id);
+    let pos = cart.index((element) => element.id == id);
     cart.splice(pos, 1);
     console.log("Curso Eliminado excitosamente");
     console.log(cart);
