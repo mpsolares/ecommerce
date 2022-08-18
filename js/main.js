@@ -48,8 +48,22 @@ function addPicture(id){
   savePicturesCart(pictures_cart);
 }
 
+
+function addLiCart(){
+  const container_li = addPicture();
+  let list = "";
+
+  container_li.forEach((picture) =>{
+    list += `<li><a class="dropdown-item" href="#">${picture.name}</a></li>`;
+    document.getElementById("").innerHTML = list;
+
+  });
+
+}
+
 function  btnCartLoad(){
   const pictures_cart = loadPicturesCart();
+  const picture_item = addLiCart();
   let total = pictures_cart.length;
   let cartContent = `<div class="btn-group dropstart">
 
@@ -59,19 +73,14 @@ function  btnCartLoad(){
                         <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary">${total}</span>
 
                         </button>
-                        
+
                         <ul class="dropdown-menu">
-                          <li><a class="dropdown-item" href="#">Action</a></li>
-                          <li><a class="dropdown-item" href="#">Another action</a></li>
-                          <li><a class="dropdown-item" href="#">Something else here</a></li>
+                          ${picture_item}
                         </ul>
                       </div>`;
   document.getElementById("btn-cart").innerHTML = cartContent;
 }
 
-// function showBtnCart(){
-//   const picture_on_cart = ;
-// }
 
 // Creo la Galeria de Productos y la almaceno con el onclick (usando id) en funcion addPicture
 function containerPictures(){
@@ -96,3 +105,4 @@ function containerPictures(){
 savePicturesLS(pictures);
 containerPictures();
 btnCartLoad();
+addLiCart();
