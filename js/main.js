@@ -46,15 +46,18 @@ function addPicture(id){
   const picture = findPicture(id);
   pictures_cart.push(picture);
   savePicturesCart(pictures_cart);
+
 }
 
 
 function addLiCart(){
-  const container_li = addPicture();
+  const container_li = loadPicturesCart();
   let list = "";
 
   container_li.forEach((picture) =>{
-    list += `<li><a class="dropdown-item" href="#">${picture.name}</a></li>`;
+    list += `<li> 
+            <a class="dropdown-item" href="#">${picture.name}</a>
+            </li>`;
     document.getElementById("").innerHTML = list;
 
   });
@@ -63,7 +66,6 @@ function addLiCart(){
 
 function  btnCartLoad(){
   const pictures_cart = loadPicturesCart();
-  const picture_item = addLiCart();
   let total = pictures_cart.length;
   let cartContent = `<div class="btn-group dropstart">
 
@@ -75,7 +77,7 @@ function  btnCartLoad(){
                         </button>
 
                         <ul class="dropdown-menu">
-                          ${picture_item}
+                          ${addLiCart}
                         </ul>
                       </div>`;
   document.getElementById("btn-cart").innerHTML = cartContent;
@@ -91,7 +93,7 @@ function containerPictures(){
     gallery += `<div class="col-md-3">
                 <div class="card my-2 mb-3">
                   <img src="img/${picture.img}" class="card-img-top" alt="${picture.name}">
-                  <div class="card-body">
+                  <div class="card-body" style="adisplay: flex;justify-content: center;align-items: center;gap: 5px;font-family: sans-serif;">
                     <p class="card-title">${picture.name}</p>
                     <h5><b>$${picture.price}</b></h5>
                     <a href="#" class="btn btn-outline-secondary align-self-center" onclick="addPicture(${picture.id})">Agregar <iconify-icon icon="akar-icons:cart" class="btn-bd-primary"></iconify-icon></a>
