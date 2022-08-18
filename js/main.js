@@ -53,14 +53,16 @@ function addPicture(id){
 function addLiCart(){
   const container_li = loadPicturesCart();
   let list = "";
+  console.log(container_li)
 
   container_li.forEach((picture) =>{
-    list += `<li> 
-            <a class="dropdown-item" href="#">${picture.name}</a>
+    list += `<li class="">
+            <img src="img/${picture.img}" class="" alt="${picture.name}" height="50"> <p>${picture.name}</p>
+            
             </li>`;
-    document.getElementById("").innerHTML = list;
 
   });
+  return list;
 
 }
 
@@ -76,8 +78,8 @@ function  btnCartLoad(){
 
                         </button>
 
-                        <ul class="dropdown-menu">
-                          ${addLiCart}
+                        <ul class="dropdown-menu flex-wrap w-100" width="100">
+                          ${addLiCart()}
                         </ul>
                       </div>`;
   document.getElementById("btn-cart").innerHTML = cartContent;
