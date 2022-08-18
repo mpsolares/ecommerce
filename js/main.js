@@ -18,13 +18,13 @@ const pictures = [
     {id:16, name:"Cuadro Flores Acuarelas", img: "cuadro04.jpg", price:2500}
 ];
 
-// Funciones LocalStorage
+// Funciones get y Set para elLocalStorage
 function savePicturesLS(pictures){
   localStorage.setItem("cuadros", JSON.stringify(pictures));
 }
 
 function loadPictureslS(){
-  return JSON.parse(localStorage.getItem("Cuadros")) || [];
+  return JSON.parse(localStorage.getItem("cuadros")) || [];
 }
 
 function savePicturesCart(pictures){
@@ -34,7 +34,7 @@ function savePicturesCart(pictures){
 function loadPicturesCart(){
   return JSON.parse(localStorage.getItem("cuadros_cart")) || [];
 }
-7*
+
 function findPicture(id){
   const pictures = loadPictureslS();
   
@@ -48,15 +48,30 @@ function addPicture(id){
   savePicturesCart(pictures_cart);
 }
 
-function btnCarritoLoad(){
+function  btnCartLoad(){
   const pictures_cart = loadPicturesCart();
   let total = pictures_cart.length;
-  let cartContent = `<button type="button" class="btn position-relative mt-2" style="color:#778899;margin-right: 30px;">
-                      <iconify-icon icon="akar-icons:cart" height="30"></iconify-icon>  
-                      <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary">${total}</span>
-                    </button>`;
+  let cartContent = `<div class="btn-group dropstart">
+
+                        <button type="button" class="btn btn-outline-secondary dropdown mt-2 mx-4" data-bs-toggle="dropdown" aria-expanded="false">
+                        
+                        <a href="#" id="btn-cart navbarLightDropdownMenuLink" class="d-flex nav-link dropdown" title="send to cart" role="button" data-bs-toggle="dropdown" aria-expanded="false"></a><iconify-icon icon="akar-icons:cart" height="30"></iconify-icon>  
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary">${total}</span>
+
+                        </button>
+                        
+                        <ul class="dropdown-menu">
+                          <li><a class="dropdown-item" href="#">Action</a></li>
+                          <li><a class="dropdown-item" href="#">Another action</a></li>
+                          <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+                      </div>`;
   document.getElementById("btn-cart").innerHTML = cartContent;
 }
+
+// function showBtnCart(){
+//   const picture_on_cart = ;
+// }
 
 // Creo la Galeria de Productos y la almaceno con el onclick (usando id) en funcion addPicture
 function containerPictures(){
@@ -80,4 +95,4 @@ function containerPictures(){
 
 savePicturesLS(pictures);
 containerPictures();
-btnCarritoLoad();
+btnCartLoad();
