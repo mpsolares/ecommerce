@@ -17,6 +17,19 @@ const pictures = [
     {id:15, name:"Combo dos Cuadros Acuarelas", img: "cuadro01.jpg", price:7500},
     {id:16, name:"Cuadro Flores Acuarelas", img: "cuadro04.jpg", price:2500}
 ];
+// contructor del objeto
+
+class Picture{
+  constructor (price){
+    this.price = parseFloat(price);
+    this.sold = false;
+    this.iva = 1.21;
+  }
+  addIva(){
+    this.price = this.price * this.iva;
+  }
+}
+
 
 // Funciones get y Set para elLocalStorage
 function savePicturesLS(pictures){
@@ -49,7 +62,6 @@ function addPicture(id){
 
 }
 
-
 function addLiCart(){
   const container_li = loadPicturesCart();
   let list = "";
@@ -66,11 +78,22 @@ function addLiCart(){
             </li>`;
 
   });
+
   return list;
+
 
 }
 
-function  btnCartLoad(){
+
+function deleteItem(id){
+  const total_pay = loadPicturesCart();
+
+}
+function cartTotal (){
+
+}
+
+function  btnCartLoad(){  
   const pictures_cart = loadPicturesCart();
   let total = pictures_cart.length;
   let cartContent = `<div class="btn-group dropstart">
@@ -84,14 +107,12 @@ function  btnCartLoad(){
 
                         <ul class="dropdown-menu" style="width: 550px;">
                           ${addLiCart()}
+                          <p class=" mx-4 d-flex flex-row-reverse text-align-right">Total<b class="mx-4 px-3">$Próximamente</b></p>
                         </ul>
                       </div>`;
   document.getElementById("btn-cart").innerHTML = cartContent;
 }
 
-function deleteItem(){
-
-}
 
 // Creo la Galeria de Productos y la almaceno con el onclick (usando id) en funcion addPicture
 function containerPictures(){
