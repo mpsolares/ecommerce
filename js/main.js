@@ -56,9 +56,13 @@ function addLiCart(){
   console.log(container_li)
 
   container_li.forEach((picture) =>{
-    list += `<li class="">
-            <img src="img/${picture.img}" class="" alt="${picture.name}" height="50"> <p>${picture.name}</p>
-            
+    list += `<li class="px-2 mt-4 mb-2 d-flex">
+            <img src="img/${picture.img}"class=" mx-4 d-flex justify-content-between" alt="${picture.name}" height="50">
+            <p class=" mx-4 d-flex justify-content-between">${picture.name}</p> 
+            <p class=" mx-4 d-flex justify-content-between"><b>$${picture.price}</b></p> 
+            <a href="#" class="text-decoration-none mb-4 d-flex justify-content-between mx-4" onclick="deleteItem()" >
+              <iconify-icon icon="fluent:delete-16-regular" style="color: lightslategray;" height="25"></iconify-icon>
+            </a>
             </li>`;
 
   });
@@ -78,13 +82,16 @@ function  btnCartLoad(){
 
                         </button>
 
-                        <ul class="dropdown-menu flex-wrap w-100" width="100">
+                        <ul class="dropdown-menu" style="width: 550px;">
                           ${addLiCart()}
                         </ul>
                       </div>`;
   document.getElementById("btn-cart").innerHTML = cartContent;
 }
 
+function deleteItem(){
+
+}
 
 // Creo la Galeria de Productos y la almaceno con el onclick (usando id) en funcion addPicture
 function containerPictures(){
