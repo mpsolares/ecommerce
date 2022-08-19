@@ -69,7 +69,7 @@ function addLiCart(){
 
   container_li.forEach((picture) =>{
     list += `<li class="px-2 mt-4 mb-2 d-flex">
-            <img src="img/${picture.img}"class=" mx-4 d-flex justify-content-between" alt="${picture.name}" height="50">
+            <img src="img/${picture.img}" class=" mx-4 d-flex justify-content-between" alt="${picture.name}" height="50">
             <p class=" mx-4 d-flex justify-content-between">${picture.name}</p> 
             <p class=" mx-4 d-flex justify-content-between"><b>$${picture.price}</b></p> 
             <a href="#" class="text-decoration-none mb-4 d-flex justify-content-between mx-4" onclick="deleteItem()" >
