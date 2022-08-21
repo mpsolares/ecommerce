@@ -146,7 +146,7 @@ function addTableCart(){
     container_table.forEach((picture) =>{
       list += `<tr>
                  <td><img src="img/${picture.img}" class=" mx-4 d-flex justify-content-between" alt="${picture.name}" height="50"></td>
-                 <td><a href="#" class="btn btn-outline-secondary" title="delete item" onclick="deleteItem(${picture.id})">-</a> ${picture.value} <a href="#" class="btn btn-outline-secondary"  title="add item" onclick="addItem(${picture.id}">+</a></td>
+                 <td><a href="#" class="btn btn-outline-secondary rounded-circle" title="delete item" onclick="deleteItem(${picture.id})">-</a> ${picture.value} <a href="#" class="btn btn-outline-secondary rounded-circle" title="add item" onclick="addItem(${picture.id}">+</a></td>
                  <td>${picture.name}</td>
                  <td><b>$ ${picture.value * picture.price}</b></td>
                  <td><a href="#" class="text-decoration-none mb-4 d-flex justify-content-between mx-4" onclick="deletePicture(${picture.id})"><iconify-icon icon="fluent:delete-16-regular" style="color: lightslategray;" height="25" alt="Delete" title="delete Picture"></iconify-icon></a></td>
@@ -170,9 +170,9 @@ function  refreshCartBtn(){
                             <a href="#" id="btn-cart navbarLightDropdownMenuLink" class="d-flex nav-link dropdown" title="send to cart" role="button" data-bs-toggle="dropdown" aria-expanded="false"></a><iconify-icon icon="akar-icons:cart" height="30"></iconify-icon>  
                             <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary">${cartTotal()}</span>
                         </button>
-                        <ul class="dropdown-menu" style="width: 750px;">
+                        <ul class="dropdown-menu mx-4 px-3" style="width: 750px;">
                             ${addTableCart()}
-                            <p class=" mx-4 d-flex flex-row-reverse text-align-right">Total<b class="mx-4 px-3">$${cartTotalItems()}</b></p>
+                            <p class=" mx-4 d-flex flex-row-reverse text-align-right">Total<b class="mx-4 px-4">$${cartTotalItems()}</b></p>
                         </ul>
                       </div>`;
   document.getElementById("btn-cart").innerHTML = cartContent;
