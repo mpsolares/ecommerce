@@ -59,6 +59,20 @@ function addPicture(id){
   const picture = findPicture(id);
   pictures_cart.push(picture);
   savePicturesCart(pictures_cart);
+  
+  Toastify({
+    text: "¡Tu cuadro ya esta en el carrito!",
+    duration: 3000,
+    gravity: "top", 
+    position: "right",
+    offset: {
+    y: 70, 
+    },
+    style: {
+      background: "#778899",
+      color: "#FFF"
+    }
+  }).showToast();
 
 }
 
@@ -66,6 +80,7 @@ function addLiCart(){
   const container_li = loadPicturesCart();
   let list = "";
   console.log(container_li)
+
 
   container_li.forEach((picture) =>{
     list += `<li class="px-2 mt-4 mb-2 d-flex">
@@ -78,7 +93,7 @@ function addLiCart(){
             </li>`;
 
   });
-
+ 
   return list;
 
 
@@ -96,6 +111,9 @@ function cartTotal (){
 function  btnCartLoad(){  
   const pictures_cart = loadPicturesCart();
   let total = pictures_cart.length;
+  
+
+
   let cartContent = `<div class="btn-group dropstart">
 
                         <button type="button" class="btn btn-outline-secondary dropdown mt-2 mx-4" data-bs-toggle="dropdown" aria-expanded="false">
@@ -119,6 +137,7 @@ function containerPictures(){
   const pictures = loadPictureslS();
   let gallery = "";
 
+  
   pictures.forEach((picture)=>{
     gallery += `<div class="col-md-3">
                 <div class="card my-2 mb-3">
