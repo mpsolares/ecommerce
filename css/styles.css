@@ -31,3 +31,6 @@ button{
     gap: 5px;
     font-family: sans-serif !important; 
 }
+table{
+    color: #778899;
+}

@@ -31,7 +31,7 @@ class Picture{
 }
 
 
-// Funciones get y Set para elLocalStorage
+// Funciones get y Set para el LocalStorage
 function savePicturesLS(pictures){
   localStorage.setItem("cuadros", JSON.stringify(pictures));
 }
@@ -54,11 +54,22 @@ function findPicture(id){
   return pictures.find(item => item.id === id);
 }
 
+// Add Pictures to Cart
+
 function addPicture(id){
   const pictures_cart = loadPicturesCart();
-  const picture = findPicture(id);
-  pictures_cart.push(picture);
+  let position = pictures_cart.findIndex(item => item.id === id); // Find out if the item exists
+
+  if (position > -1 ){
+    pictures_cart[position].value += 1;
+  }else{
+    const picture = findPicture(id);
+    picture.value = 1; 
+    pictures_cart.push(picture);
+  }
+
   savePicturesCart(pictures_cart);
+  refreshCartBtn();
   
   Toastify({
     text: "¡Tu cuadro ya esta en el carrito!",
@@ -76,56 +87,97 @@ function addPicture(id){
 
 }
 
-function addLiCart(){
-  const container_li = loadPicturesCart();
-  let list = "";
-  console.log(container_li)
+// add item to cart list
 
-
-  container_li.forEach((picture) =>{
-    list += `<li class="px-2 mt-4 mb-2 d-flex">
-            <img src="img/${picture.img}" class=" mx-4 d-flex justify-content-between" alt="${picture.name}" height="50">
-            <p class=" mx-4 d-flex justify-content-between">${picture.name}</p> 
-            <p class=" mx-4 d-flex justify-content-between"><b>$${picture.price}</b></p> 
-            <a href="#" class="text-decoration-none mb-4 d-flex justify-content-between mx-4" onclick="deleteItem()" >
-              <iconify-icon icon="fluent:delete-16-regular" style="color: lightslategray;" height="25"></iconify-icon>
-            </a>
-            </li>`;
-
-  });
- 
-  return list;
-
-
+function addItem(id){
+  addPicture(id);
+  refreshCartBtn();
 }
 
+
+// Delete Pictures from Cart
+
+function deletePicture(id){
+  const pictures_cart = loadPicturesCart();
+  let position = pictures_cart.findIndex(item => item.id === id); // Find out if the item exists
+  pictures_cart[position].value -=1;
+
+  if (picture.value == 0 ){
+    pictures_cart.splice(position, 1); // decrease by 1 the count
+    
+    Toastify({
+      text: "¡Quitaste un cuadro del carrito!",
+      duration: 3000,
+      gravity: "top", 
+      position: "right",
+      offset: {
+      y: 70, 
+      },
+      style: {
+        background: "#778899",
+        color: "#FFF"
+      }
+    }).showToast();
+  }
+
+  savePicturesCart(pictures_cart);
+  refreshCartBtn();
+
+}
+// Delete Pictures from Cart list
 
 function deleteItem(id){
-  const total_pay = loadPicturesCart();
+
+  deletePicture(id);
+  refreshCartBtn();
 
 }
+
+
+function addTableCart(){
+  const container_table = loadPicturesCart();
+  let list = "";
+  let content = "";
+  console.log(container_table)
+
+  if (pictures.length == 0 ){
+    content = `<p>Todavía no agregaste cuadros al carrito!</p>`;
+  } else{
+    list += `<table class="table">`;
+    container_table.forEach((picture) =>{
+      list += `<tr>
+                 <td><img src="img/${picture.img}" class=" mx-4 d-flex justify-content-between" alt="${picture.name}" height="50"></td>
+                 <td><a href="#" class="btn btn-outline-secondary" title="delete item" onclick="deleteItem(${picture.id})">-</a> ${picture.value} <a href="#" class="btn btn-outline-secondary"  title="add item" onclick="addItem(${picture.id}">+</a></td>
+                 <td>${picture.name}</td>
+                 <td><b>$ ${picture.price}</b></td>
+                 <td><a href="#" class="text-decoration-none mb-4 d-flex justify-content-between mx-4" onclick="deletePicture(${picture.id})"><iconify-icon icon="fluent:delete-16-regular" style="color: lightslategray;" height="25" alt="Delete" title="delete Picture"></iconify-icon></a></td>
+                </tr>`;
+  
+    });
+    list += `</table> `;  
+  }
+   return list;
+
+}
+
 function cartTotal (){
 
 }
 
-function  btnCartLoad(){  
+function  refreshCartBtn(){  
   const pictures_cart = loadPicturesCart();
   let total = pictures_cart.length;
   
 
 
   let cartContent = `<div class="btn-group dropstart">
-
                         <button type="button" class="btn btn-outline-secondary dropdown mt-2 mx-4" data-bs-toggle="dropdown" aria-expanded="false">
-                        
-                        <a href="#" id="btn-cart navbarLightDropdownMenuLink" class="d-flex nav-link dropdown" title="send to cart" role="button" data-bs-toggle="dropdown" aria-expanded="false"></a><iconify-icon icon="akar-icons:cart" height="30"></iconify-icon>  
-                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary">${total}</span>
-
+                            <a href="#" id="btn-cart navbarLightDropdownMenuLink" class="d-flex nav-link dropdown" title="send to cart" role="button" data-bs-toggle="dropdown" aria-expanded="false"></a><iconify-icon icon="akar-icons:cart" height="30"></iconify-icon>  
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary">${total}</span>
                         </button>
-
-                        <ul class="dropdown-menu" style="width: 550px;">
-                          ${addLiCart()}
-                          <p class=" mx-4 d-flex flex-row-reverse text-align-right">Total<b class="mx-4 px-3">$Próximamente</b></p>
+                        <ul class="dropdown-menu" style="width: 750px;">
+                            ${addTableCart()}
+                            <p class=" mx-4 d-flex flex-row-reverse text-align-right">Total<b class="mx-4 px-3">$Próximamente</b></p>
                         </ul>
                       </div>`;
   document.getElementById("btn-cart").innerHTML = cartContent;
@@ -155,5 +207,5 @@ function containerPictures(){
 
 savePicturesLS(pictures);
 containerPictures();
-btnCartLoad();
-addLiCart();
+refreshCartBtn();
+addTableCart();
