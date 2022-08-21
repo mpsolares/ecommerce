@@ -137,11 +137,10 @@ function deleteItem(id){
 function addTableCart(){
   const container_table = loadPicturesCart();
   let list = "";
-  let content = "";
   console.log(container_table)
 
   if (pictures.length == 0 ){
-    content = `<p>Todavía no agregaste cuadros al carrito!</p>`;
+    list += `<p>Todavía no agregaste cuadros al carrito!</p>`;
   } else{
     list += `<table class="table">`;
     container_table.forEach((picture) =>{
@@ -165,24 +164,36 @@ function cartTotal (){
 }
 
 function  refreshCartBtn(){  
-  const pictures_cart = loadPicturesCart();
-  let total = pictures_cart.length;
   
-
-
   let cartContent = `<div class="btn-group dropstart">
                         <button type="button" class="btn btn-outline-secondary dropdown mt-2 mx-4" data-bs-toggle="dropdown" aria-expanded="false">
                             <a href="#" id="btn-cart navbarLightDropdownMenuLink" class="d-flex nav-link dropdown" title="send to cart" role="button" data-bs-toggle="dropdown" aria-expanded="false"></a><iconify-icon icon="akar-icons:cart" height="30"></iconify-icon>  
-                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary">${total}</span>
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary">${cartTotal()}</span>
                         </button>
                         <ul class="dropdown-menu" style="width: 750px;">
                             ${addTableCart()}
-                            <p class=" mx-4 d-flex flex-row-reverse text-align-right">Total<b class="mx-4 px-3">$Próximamente</b></p>
+                            <p class=" mx-4 d-flex flex-row-reverse text-align-right">Total<b class="mx-4 px-3">$${cartTotalItems()}</b></p>
                         </ul>
                       </div>`;
   document.getElementById("btn-cart").innerHTML = cartContent;
 }
 
+// Adding price items
+
+function cartTotal(){
+  const pictures_cart = loadPicturesCart();
+ 
+  return pictures_cart.reduce((accumulator, item) => accumulator + item.value, 0);
+}
+
+// Adding price items
+
+function cartTotalItems(){
+  const pictures_cart = loadPicturesCart();
+ 
+  return pictures_cart.reduce((accumulator, item) => accumulator + (item.value * item.price), 0);
+
+}
 
 // Creo la Galeria de Productos y la almaceno con el onclick (usando id) en funcion addPicture
 function containerPictures(){
