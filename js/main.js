@@ -98,11 +98,12 @@ function addItem(id){
 // Delete Pictures from Cart
 
 function deletePicture(id){
+  
   const pictures_cart = loadPicturesCart();
   let position = pictures_cart.findIndex(item => item.id === id); // Find out if the item exists
   pictures_cart[position].value -=1;
 
-  if (position >= 0){
+  if (pictures_cart[position].value == 0){
     pictures_cart.splice(position, 1); // decrease by 1 the count
     
     Toastify({
@@ -124,11 +125,31 @@ function deletePicture(id){
   refreshCartBtn();
 
 }
+
 // Delete Pictures from Cart list
 
 function deleteItem(id){
+  const pictures_cart = loadPicturesCart();
+  let position = pictures_cart.findIndex(item => item.id === id); // Find out if the item exists
 
-  deletePicture(id);
+  if (position >= 0){
+    pictures_cart.splice(position, 1); // decrease by 1 the count
+    /*Toastify({
+      text: "¡Quitaste un cuadro del carrito!",
+      duration: 3000,
+      gravity: "top", 
+      position: "right",
+      offset: {
+      y: 70, 
+      },
+      style: {
+        background: "#778899",
+        color: "#FFF"
+      }
+    }).showToast();*/
+  }
+
+  savePicturesCart(pictures_cart);
   refreshCartBtn();
 
 }
@@ -142,14 +163,14 @@ function addTableCart(){
   if (pictures.length == 0 ){
     list += `<p>Todavía no agregaste cuadros al carrito!</p>`;
   } else{
-    list += `<table class="table">`;
+    list += `<table class="table" >`;
     container_table.forEach((picture) =>{
       list += `<tr>
                  <td><img src="img/${picture.img}" class=" mx-4 d-flex justify-content-between" alt="${picture.name}" height="50"></td>
-                 <td><a href="#" class="btn btn-outline-secondary rounded-circle" title="delete item" onclick="deleteItem(${picture.id})">-</a> ${picture.value} <a href="#" class="btn btn-outline-secondary rounded-circle" title="add item" onclick="addItem(${picture.id})">+</a></td>
+                 <td><a href="#" class="btn btn-outline-secondary rounded-circle" title="delete item" onclick="deletePicture(${picture.id})" style="margin-right: 5px" aria-labelledby="dropdownMenuClickable">-</a>${picture.value}<a href="#" class="btn btn-outline-secondary rounded-circle" style="margin-left: 7px" title="add item" onclick="addItem(${picture.id})" aria-labelledby="dropdownMenuClickable">+</a></td>
                  <td>${picture.name}</td>
                  <td><b>$ ${picture.value * picture.price}</b></td>
-                 <td><a href="#" class="text-decoration-none mb-4 d-flex justify-content-between mx-4" onclick="deletePicture(${picture.id})"><iconify-icon icon="fluent:delete-16-regular" style="color: lightslategray;" height="25" alt="Delete" title="delete Picture"></iconify-icon></a></td>
+                 <td><a href="#" class="text-decoration-none mb-4 d-flex justify-content-between mx-4" onclick="deleteItem(${picture.id})" aria-labelledby="dropdownMenuClickable"><iconify-icon icon="fluent:delete-16-regular" style="color: lightslategray;" height="25" alt="Delete" title="delete Picture"></iconify-icon></a></td>
                 </tr>`;
   
     });
@@ -165,18 +186,19 @@ function cartTotal (){
 
 function  refreshCartBtn(){  
   
-  let cartContent = `<div class="btn-group dropstart">
-                        <button type="button" class="btn btn-outline-secondary dropdown mt-2 mx-4" data-bs-toggle="dropdown" aria-expanded="false">
+  let cartContent = `<div class="btn-group dropstart " >
+                        <button class="btn btn-outline-secondary dropdown mt-2 mx-4" type="button" id="dropdownMenuClickable" data-bs-toggle="dropdown" data-bs-auto-close="false" aria-expanded="false">
                             <a href="#" id="btn-cart navbarLightDropdownMenuLink" class="d-flex nav-link dropdown" title="send to cart" role="button" data-bs-toggle="dropdown" aria-expanded="false"></a><iconify-icon icon="akar-icons:cart" height="30"></iconify-icon>  
                             <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary">${cartTotal()}</span>
                         </button>
-                        <ul class="dropdown-menu mx-4 px-3" style="width: 750px;">
+                        <ul class="dropdown-menu mx-4 px-3" style="width: 750px;" aria-labelledby="dropdownMenuClickable">
                             ${addTableCart()}
                             <p class=" mx-4 d-flex flex-row-reverse text-align-right">Total<b class="mx-4 px-4">$${cartTotalItems()}</b></p>
                         </ul>
                       </div>`;
   document.getElementById("btn-cart").innerHTML = cartContent;
 }
+
 
 // Adding price items
 
@@ -215,6 +237,7 @@ function containerPictures(){
       document.getElementById("result").innerHTML = gallery;
   }); 
 }
+
 
 savePicturesLS(pictures);
 containerPictures();
