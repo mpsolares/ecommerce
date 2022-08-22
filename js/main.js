@@ -102,7 +102,7 @@ function deletePicture(id){
   let position = pictures_cart.findIndex(item => item.id === id); // Find out if the item exists
   pictures_cart[position].value -=1;
 
-  if (picture.value == 0 ){
+  if (position >= 0){
     pictures_cart.splice(position, 1); // decrease by 1 the count
     
     Toastify({
@@ -146,7 +146,7 @@ function addTableCart(){
     container_table.forEach((picture) =>{
       list += `<tr>
                  <td><img src="img/${picture.img}" class=" mx-4 d-flex justify-content-between" alt="${picture.name}" height="50"></td>
-                 <td><a href="#" class="btn btn-outline-secondary rounded-circle" title="delete item" onclick="deleteItem(${picture.id})">-</a> ${picture.value} <a href="#" class="btn btn-outline-secondary rounded-circle" title="add item" onclick="addItem(${picture.id}">+</a></td>
+                 <td><a href="#" class="btn btn-outline-secondary rounded-circle" title="delete item" onclick="deleteItem(${picture.id})">-</a> ${picture.value} <a href="#" class="btn btn-outline-secondary rounded-circle" title="add item" onclick="addItem(${picture.id})">+</a></td>
                  <td>${picture.name}</td>
                  <td><b>$ ${picture.value * picture.price}</b></td>
                  <td><a href="#" class="text-decoration-none mb-4 d-flex justify-content-between mx-4" onclick="deletePicture(${picture.id})"><iconify-icon icon="fluent:delete-16-regular" style="color: lightslategray;" height="25" alt="Delete" title="delete Picture"></iconify-icon></a></td>
