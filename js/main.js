@@ -180,10 +180,6 @@ function addTableCart(){
 
 }
 
-function cartTotal (){
-
-}
-
 function  refreshCartBtn(){  
   
   let cartContent = `<div class="btn-group dropstart " >
