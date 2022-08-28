@@ -234,6 +234,33 @@ function containerPictures(){
   }); 
 }
 
+//Agregar fetch al proyecto
+
+const result = document.getElementById("resultado");
+fetch('https://mpsolares.github.io/ecommerce/')
+.then((response) => response.json())
+.then((data) => {
+    console.log(data);
+
+    data.forEach(value => {
+        let column = document.createElement("div");
+        column.className = "col-md-3";
+        let div_father = document.createElement("div");
+        div_father.className = "card my-3";
+        let div_son1 = document.createElement("div");
+        div_son1.className = "card-header";
+        let div_son2 = document.createElement("div");
+        div_son2.className = "card-body";
+        let paragraph = document.createElement("p");
+        div_son1.innerText = value.title;
+        paragraph.innerText = value.body;
+        div_son2.appendChild(paragraph);
+        div_father.appendChild(div_son1);
+        div_father.appendChild(div_son2);
+        column.appendChild(div_father);
+        result.appendChild(column);
+    });
+}) 
 
 savePicturesLS(pictures);
 containerPictures();
