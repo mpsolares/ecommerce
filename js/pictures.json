@@ -1,0 +1,18 @@
+[
+    {"id":1, "name":"Cuadro Acuarelas Marrones", "img": "cuadro03.jpg", "price":4000},
+    {"id":2, "name":"Cuadro Acuarelas Pasteles", "img": "cuadro02.jpg", "price":3000},
+    {"id":3, "name":"Combo dos Cuadros Acuarelas", "img": "cuadro03.jpg", "price":7500},
+    {"id":4, "name":"Cuadro Flores Acuarelas", "img": "cuadro04.jpg", "price":2500},
+    {"id":5, "name":"Cuadro Acuarelas Marrones", "img": "cuadro04.jpg", "price":4000},
+    {"id":6, "name":"Cuadro Acuarelas Pasteles", "img": "cuadro03.jpg", "price":3000},
+    {"id":7, "name":"Combo dos Cuadros Acuarelas", "img": "cuadro02.jpg", "price":7500},
+    {"id":8, "name":"Cuadro Flores Acuarelas", "img": "cuadro01.jpg", "price":2500},
+    {"id":9, "name":"Cuadro Acuarelas Marrones", "img": "cuadro01.jpg", "price":4000},
+    {"id":10, "name":"Cuadro Acuarelas Pasteles", "img": "cuadro02.jpg", "price":3000},
+    {"id":11, "name":"Combo dos Cuadros Acuarelas", "img": "cuadro04.jpg", "price":7500},
+    {"id":12, "name":"Cuadro Flores Acuarelas", "img": "cuadro03.jpg", "price":2500},
+    {"id":13, "name":"Cuadro Acuarelas Marrones", "img": "cuadro03.jpg", "price":4000},
+    {"id":14, "name":"Cuadro Acuarelas Pasteles", "img": "cuadro02.jpg", "price":3000},
+    {"id":15, "name":"Combo dos Cuadros Acuarelas", "img": "cuadro01.jpg", "price":7500},
+    {"id":16, "name":"Cuadro Flores Acuarelas", "img": "cuadro04.jpg", "price":2500}
+]

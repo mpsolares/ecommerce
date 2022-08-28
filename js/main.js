@@ -167,7 +167,7 @@ function addTableCart(){
     container_table.forEach((picture) =>{
       list += `<tr>
                  <td><img src="img/${picture.img}" class=" mx-4 d-flex justify-content-between" alt="${picture.name}" height="50"></td>
-                 <td><a href="#" class="btn btn-outline-secondary rounded-circle" title="delete item" onclick="deletePicture(${picture.id})" style="margin-right: 5px" aria-labelledby="dropdownMenuClickable">-</a>${picture.value}<a href="#" class="btn btn-outline-secondary rounded-circle" style="margin-left: 7px" title="add item" onclick="addItem(${picture.id})" aria-labelledby="dropdownMenuClickable">+</a></td>
+                 <td><span class="btn btn-outline-secondary rounded-circle" title="delete item" onclick="deletePicture(${picture.id})" style="margin-right: 5px" aria-labelledby="dropdownMenuClickable">-</span>${picture.value}<span class="btn btn-outline-secondary rounded-circle" style="margin-left: 7px" title="add item" onclick="addItem(${picture.id})" aria-labelledby="dropdownMenuClickable">+</span></td>
                  <td>${picture.name}</td>
                  <td><b>$ ${picture.value * picture.price}</b></td>
                  <td><a href="#" class="text-decoration-none mb-4 d-flex justify-content-between mx-4" onclick="deleteItem(${picture.id})" aria-labelledby="dropdownMenuClickable"><iconify-icon icon="fluent:delete-16-regular" style="color: lightslategray;" height="25" alt="Delete" title="delete Picture"></iconify-icon></a></td>
@@ -237,7 +237,7 @@ function containerPictures(){
 //Agregar fetch al proyecto
 
 const result = document.getElementById("resultado");
-fetch('https://mpsolares.github.io/ecommerce/')
+fetch('js/pictures.json')
 .then((response) => response.json())
 .then((data) => {
     console.log(data);
