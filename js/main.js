@@ -73,7 +73,7 @@ function addPicture(id){
   
   Toastify({
     text: "¡Tu cuadro ya esta en el carrito!",
-    duration: 3000,
+    duration: 2000,
     gravity: "top", 
     position: "right",
     offset: {
@@ -90,8 +90,20 @@ function addPicture(id){
 // add item to cart list
 
 function addItem(id){
-  addPicture(id);
+  const pictures_cart = loadPicturesCart();
+  let position = pictures_cart.findIndex(item => item.id === id); // Find out if the item exists
+
+  if (position > -1 ){
+    pictures_cart[position].value += 1;
+  }else{
+    const picture = findPicture(id);
+    picture.value = 1; 
+    pictures_cart.push(picture);
+  }
+
+  savePicturesCart(pictures_cart);
   refreshCartBtn();
+
 }
 
 
@@ -108,7 +120,7 @@ function deletePicture(id){
     
     Toastify({
       text: "¡Quitaste un cuadro del carrito!",
-      duration: 3000,
+      duration: 2000,
       gravity: "top", 
       position: "right",
       offset: {
@@ -134,7 +146,7 @@ function deleteItem(id){
 
   if (position >= 0){
     pictures_cart.splice(position, 1); // decrease by 1 the count
-    /*Toastify({
+    Toastify({
       text: "¡Quitaste un cuadro del carrito!",
       duration: 3000,
       gravity: "top", 
@@ -146,7 +158,7 @@ function deleteItem(id){
         background: "#778899",
         color: "#FFF"
       }
-    }).showToast();*/
+    }).showToast();
   }
 
   savePicturesCart(pictures_cart);
@@ -183,11 +195,11 @@ function addTableCart(){
 function  refreshCartBtn(){  
   
   let cartContent = `<div class="btn-group dropstart " >
-                        <button class="btn btn-outline-secondary dropdown mt-2 mx-4" type="button" id="dropdownMenuClickable" data-bs-toggle="dropdown" data-bs-auto-close="false" aria-expanded="false">
+                        <button class="btn btn-outline-secondary dropdown mt-2 mx-4" type="button" id="dropdownMenuClickableOutside" data-bs-toggle="dropdown" data-bs-auto-close="false" aria-expanded="false">
                             <a href="#" id="btn-cart navbarLightDropdownMenuLink" class="d-flex nav-link dropdown" title="send to cart" role="button" data-bs-toggle="dropdown" aria-expanded="false"></a><iconify-icon icon="akar-icons:cart" height="30"></iconify-icon>  
                             <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary">${cartTotal()}</span>
                         </button>
-                        <ul class="dropdown-menu mx-4 px-3" style="width: 750px;" aria-labelledby="dropdownMenuClickable">
+                        <ul class="dropdown-menu mx-4 px-3" style="width: 750px;" aria-expanded="false" data-bs-auto-close="false" id="dropdownMenuClickableOutside">
                             ${addTableCart()}
                             <p class=" mx-4 d-flex flex-row-reverse text-align-right">Total<b class="mx-4 px-4">$${cartTotalItems()}</b></p>
                         </ul>
@@ -237,30 +249,36 @@ function containerPictures(){
 //Agregar fetch al proyecto
 
 const result = document.getElementById("resultado");
-fetch('js/pictures.json')
-.then((response) => response.json())
-.then((data) => {
-    console.log(data);
 
-    data.forEach(value => {
-        let column = document.createElement("div");
-        column.className = "col-md-3";
-        let div_father = document.createElement("div");
-        div_father.className = "card my-3";
-        let div_son1 = document.createElement("div");
-        div_son1.className = "card-header";
-        let div_son2 = document.createElement("div");
-        div_son2.className = "card-body";
-        let paragraph = document.createElement("p");
-        div_son1.innerText = value.title;
-        paragraph.innerText = value.body;
-        div_son2.appendChild(paragraph);
-        div_father.appendChild(div_son1);
-        div_father.appendChild(div_son2);
-        column.appendChild(div_father);
-        result.appendChild(column);
-    });
-}) 
+async function usingFetch ( ) {
+  let arr = [ ] ;
+  await fetch ('./js/pictures.json')
+      .then (res => res.json())
+      .then (data => arr = data)
+      .catch (err => console.log (err));
+      setTimeOut(() => {
+        console.log(arr);
+        arr.forEach (value => {
+          let column = document.createElement("div");
+          column.className = "col-md-3";
+          let div_father = document.createElement("div");
+          div_father.className = "card my-3";
+          let div_son1 = document.createElement("div");
+          div_son1.className = "card-header";
+          let div_son2 = document.createElement("div");
+          div_son2.className = "card-body";
+          let paragraph = document.createElement("p");
+          div_son1.innerText = value.title;
+          paragraph.innerText = value.body;
+          div_son2.appendChild(paragraph);
+          div_father.appendChild(div_son1);
+          div_father.appendChild(div_son2);
+          column.appendChild(div_father);
+          result.appendChild(column);
+        });
+      },200)
+}
+usingFetch();
 
 savePicturesLS(pictures);
 containerPictures();
