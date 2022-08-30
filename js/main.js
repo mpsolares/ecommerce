@@ -248,7 +248,7 @@ function containerPictures(){
 
 //Agregar fetch al proyecto
 
-const result = document.getElementById("resultado");
+//const result = document.getElementById("resultado");
 
 async function usingFetch ( ) {
   let arr = [ ] ;
@@ -256,7 +256,8 @@ async function usingFetch ( ) {
       .then (res => res.json())
       .then (data => arr = data)
       .catch (err => console.log (err));
-      setTimeOut(() => {
+
+      setTimeout(() => {
         console.log(arr);
         arr.forEach (value => {
           let column = document.createElement("div");
@@ -276,7 +277,7 @@ async function usingFetch ( ) {
           column.appendChild(div_father);
           result.appendChild(column);
         });
-      },200)
+      }, 200)
 }
 usingFetch();
 
