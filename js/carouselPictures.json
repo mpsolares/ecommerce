@@ -1,5 +1,6 @@
 [
-  {"id":1, "name":"Cuadro Acuarelas Marrones", "img": "carousel_01.jpg","price":7500},
-  {"id":2, "name":"Cuadro Acuarelas Pasteles", "img": "carousel_02.jpgg","price":5000},
-  {"id":3, "name":"Combo dos Cuadros Acuarelas", "img": "carousel_03.jpg","price":3500}
+  {"id":1, "name":"Combo dos Cuadros Acuarelas", "img": "carousel_01.jpg","price":7500},
+  {"id":2, "name":"Cuadro Acuarelas Pasteles", "img": "carousel_02.jpg","price":4500},
+  {"id":2, "name":"Cuadro Acuarelas Pasteles", "img": "carousel_04.jpg","price":5000},
+  {"id":3, "name":"Cuadro Acuarelas Marrones", "img": "carousel_03.jpg","price":3500}
 ]
