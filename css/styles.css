@@ -1,6 +1,10 @@
 *{
     font-family: 'Rubik', sans-serif;
 }
+a{
+    text-decoration: none;
+    color: inherit;
+}
 nav{
     background-color: #fff;
     box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 15%), inset 0 -1px 0 rgb(0 0 0 / 15%);
@@ -34,3 +38,38 @@ button{
 table{
     color: #778899;
 }
+footer {
+    position: relative;
+    bottom: 0;
+    color: #778899;
+    background-color: #FFF;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 80px;
+    width: 100%;
+    box-shadow: 0 0.5rem 0.5rem rgba(208, 208, 208, 0.250), inset 0 3px 0 rgba(188, 188, 188, 0.250); 
+    margin-top: 2rem;
+}
+  
+  .footer-iconos {
+    margin-left: 20px;
+    align-items: center; }
+
+a:link {
+    text-decoration: none;
+    color: #778899;
+  }
+  
+  a:hover {
+    color: #3BC492;
+  }
+ .back-picture{
+    background-color: #FFF;
+    opacity:0.6;
+    margin: 0;
+    color: black !important;
+ }
+ .back-picture:hover{
+    color: #3BC492 !important;
+ }

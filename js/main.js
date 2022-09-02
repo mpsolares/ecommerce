@@ -19,19 +19,17 @@ async function carouselFetch ( ) {
       .then (response => response.json())
       .then (data => arrayCouresel = data)
       .catch (err => console.log (err));
-
+      let active = "active";
       setTimeout(() => {
-        console.log(arrayCouresel);
         arrayCouresel.forEach (picture => {
-            carousel +=`<div class="carousel-inner">
-                          <div class="carousel-item active" data-bs-interval="10000">
-                            <img src="img/${picture.img}" class="d-block w-100" alt="img/${picture.name}">
-                            <div class="carousel-caption d-none d-md-block">
-                              <h5>${picture.name}</h5>
-                              <p>$${picture.price}</p>
-                            </div>
+            carousel +=`<div class="carousel-item ${active}">
+                          <img src="img/${picture.img}" class="d-block w-100" alt="img/${picture.name}">
+                          <div class="carousel-caption d-none d-md-block ">
+                            <h5 class="back-picture pt-2"><a href="#gallery">${picture.name}</a></h5>
+                            <p class="back-picture pb-2"><a href="#gallery">$${picture.price}</a></p>
                           </div>
                         </div>`;
+            active = "";
           });
           document.getElementById("carousel").innerHTML = carousel;
 
@@ -40,8 +38,12 @@ async function carouselFetch ( ) {
 carouselFetch();
 
 // Funciones get y Set para el LocalStorage
-function savePicturesLS(pictures){
-  localStorage.setItem("cuadros", JSON.stringify(pictures));
+function savePicturesLS(){
+  fetch ('js/pictures.json')
+  .then (response => response.json())
+  .then (data => {
+    localStorage.setItem("cuadros", JSON.stringify(data));
+  });
 }
 
 function loadPictureslS(){
@@ -181,9 +183,9 @@ function deleteItem(id){
 function addTableCart(){
   const container_table = loadPicturesCart();
   let list = "";
-  console.log(container_table)
+  //console.log(container_table)
 
-  if (pictures.length == 0 ){
+  if (container_table.length == 0 ){
     list += `<p>Todavía no agregaste cuadros al carrito!</p>`;
   } else{
     list += `<table class="table" >`;
@@ -265,7 +267,6 @@ async function usingFetch ( ) {
       }, 200)
 }
 usingFetch();
-
-savePicturesLS(pictures);
+savePicturesLS();
 refreshCartBtn();
 addTableCart();
