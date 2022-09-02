@@ -10,6 +10,34 @@ class Picture{
   }
 }
 
+// Usando Fetch para Carrousel
+
+async function carouselFetch ( ) {
+  let arrayCouresel = [ ] ;
+  let carousel = "";
+  await fetch ('js/carouselPictures.json')
+      .then (response => response.json())
+      .then (data => arrayCouresel = data)
+      .catch (err => console.log (err));
+
+      setTimeout(() => {
+        console.log(arrayCouresel);
+        arrayCouresel.forEach (picture => {
+            carousel +=`<div class="carousel-inner">
+                          <div class="carousel-item active" data-bs-interval="10000">
+                            <img src="img/${picture.img}" class="d-block w-100" alt="img/${picture.name}">
+                            <div class="carousel-caption d-none d-md-block">
+                              <h5>${picture.name}</h5>
+                              <p>$${picture.price}</p>
+                            </div>
+                          </div>
+                        </div>`;
+          });
+          document.getElementById("carousel").innerHTML = carousel;
+
+  }, 200)
+}
+carouselFetch();
 
 // Funciones get y Set para el LocalStorage
 function savePicturesLS(pictures){
