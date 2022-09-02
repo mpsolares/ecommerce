@@ -1,24 +1,4 @@
-// Creo el Array de Productos
-const pictures = [
-    {id:01, name:"Cuadro Acuarelas Marrones", img: "cuadro01.jpg", price:4000},
-    {id:02, name:"Cuadro Acuarelas Pasteles", img: "cuadro02.jpg", price:3000},
-    {id:03, name:"Combo dos Cuadros Acuarelas", img: "cuadro03.jpg", price:7500},
-    {id:04, name:"Cuadro Flores Acuarelas", img: "cuadro04.jpg", price:2500},
-    {id:05, name:"Cuadro Acuarelas Marrones", img: "cuadro04.jpg", price:4000},
-    {id:06, name:"Cuadro Acuarelas Pasteles", img: "cuadro03.jpg", price:3000},
-    {id:07, name:"Combo dos Cuadros Acuarelas", img: "cuadro02.jpg", price:7500},
-    {id:08, name:"Cuadro Flores Acuarelas", img: "cuadro01.jpg", price:2500},
-    {id:09, name:"Cuadro Acuarelas Marrones", img: "cuadro01.jpg", price:4000},
-    {id:10, name:"Cuadro Acuarelas Pasteles", img: "cuadro02.jpg", price:3000},
-    {id:11, name:"Combo dos Cuadros Acuarelas", img: "cuadro04.jpg", price:7500},
-    {id:12, name:"Cuadro Flores Acuarelas", img: "cuadro03.jpg", price:2500},
-    {id:13, name:"Cuadro Acuarelas Marrones", img: "cuadro03.jpg", price:4000},
-    {id:14, name:"Cuadro Acuarelas Pasteles", img: "cuadro02.jpg", price:3000},
-    {id:15, name:"Combo dos Cuadros Acuarelas", img: "cuadro01.jpg", price:7500},
-    {id:16, name:"Cuadro Flores Acuarelas", img: "cuadro04.jpg", price:2500}
-];
-// contructor del objeto
-
+// contructor del objeto 
 class Picture{
   constructor (price){
     this.price = parseFloat(price);
@@ -81,6 +61,7 @@ function addPicture(id){
     },
     style: {
       background: "#778899",
+      maxWidth: "fit-content",
       color: "#FFF"
     }
   }).showToast();
@@ -128,6 +109,7 @@ function deletePicture(id){
       },
       style: {
         background: "#778899",
+        maxWidth: "fit-content",
         color: "#FFF"
       }
     }).showToast();
@@ -148,7 +130,7 @@ function deleteItem(id){
     pictures_cart.splice(position, 1); // decrease by 1 the count
     Toastify({
       text: "¡Quitaste un cuadro del carrito!",
-      duration: 3000,
+      duration: 2000,
       gravity: "top", 
       position: "right",
       offset: {
@@ -156,6 +138,7 @@ function deleteItem(id){
       },
       style: {
         background: "#778899",
+        maxWidth: "fit-content",
         color: "#FFF"
       }
     }).showToast();
@@ -226,62 +209,35 @@ function cartTotalItems(){
 }
 
 // Creo la Galeria de Productos y la almaceno con el onclick (usando id) en funcion addPicture
-function containerPictures(){
-  const pictures = loadPictureslS();
-  let gallery = "";
-
-  
-  pictures.forEach((picture)=>{
-    gallery += `<div class="col-md-3">
-                <div class="card my-2 mb-3">
-                  <img src="img/${picture.img}" class="card-img-top" alt="${picture.name}">
-                  <div class="card-body" style="adisplay: flex;justify-content: center;align-items: center;gap: 5px;font-family: sans-serif;">
-                    <p class="card-title">${picture.name}</p>
-                    <h5><b>$${picture.price}</b></h5>
-                    <a href="#" class="btn btn-outline-secondary align-self-center" onclick="addPicture(${picture.id})">Agregar <iconify-icon icon="akar-icons:cart" class="btn-bd-primary"></iconify-icon></a>
-                  </div>
-                </div>
-                </div>`;
-      document.getElementById("result").innerHTML = gallery;
-  }); 
-}
-
-//Agregar fetch al proyecto
-
-//const result = document.getElementById("resultado");
 
 async function usingFetch ( ) {
   let arr = [ ] ;
-  await fetch ('./js/pictures.json')
+  let gallery = "";
+  await fetch ('js/pictures.json')
       .then (res => res.json())
       .then (data => arr = data)
       .catch (err => console.log (err));
 
       setTimeout(() => {
         console.log(arr);
-        arr.forEach (value => {
-          let column = document.createElement("div");
-          column.className = "col-md-3";
-          let div_father = document.createElement("div");
-          div_father.className = "card my-3";
-          let div_son1 = document.createElement("div");
-          div_son1.className = "card-header";
-          let div_son2 = document.createElement("div");
-          div_son2.className = "card-body";
-          let paragraph = document.createElement("p");
-          div_son1.innerText = value.title;
-          paragraph.innerText = value.body;
-          div_son2.appendChild(paragraph);
-          div_father.appendChild(div_son1);
-          div_father.appendChild(div_son2);
-          column.appendChild(div_father);
-          result.appendChild(column);
-        });
+        arr.forEach (picture => {
+            gallery += `<div class="col-md-3">
+                        <div class="card my-2 mb-3">
+                          <img src="./img/${picture.img}" class="card-img-top" alt="${picture.name}">
+                          <div class="card-body" style="adisplay: flex;justify-content: center;align-items: center;gap: 5px;font-family: sans-serif;">
+                            <p class="card-title">${picture.name}</p>
+                            <h5><b>$${picture.price}</b></h5>
+                            <a href="#" class="btn btn-outline-secondary align-self-center" onclick="addPicture(${picture.id})">Agregar <iconify-icon icon="akar-icons:cart" class="btn-bd-primary"></iconify-icon></a>
+                          </div>
+                        </div>
+                        </div>`;
+                      });
+              document.getElementById("result").innerHTML = gallery;
+
       }, 200)
 }
 usingFetch();
 
 savePicturesLS(pictures);
-containerPictures();
 refreshCartBtn();
 addTableCart();
