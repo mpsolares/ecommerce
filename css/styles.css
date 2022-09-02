@@ -62,7 +62,7 @@ a:link {
   }
   
   a:hover {
-    color: #3BC492;
+    color: #FFF;
   }
  .back-picture{
     background-color: #FFF;
@@ -70,6 +70,4 @@ a:link {
     margin: 0;
     color: black !important;
  }
- .back-picture:hover{
-    color: #3BC492 !important;
- }
+

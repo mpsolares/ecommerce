@@ -24,9 +24,12 @@ async function carouselFetch ( ) {
         arrayCouresel.forEach (picture => {
             carousel +=`<div class="carousel-item ${active}">
                           <img src="img/${picture.img}" class="d-block w-100" alt="img/${picture.name}">
-                          <div class="carousel-caption d-none d-md-block ">
-                            <h5 class="back-picture pt-2"><a href="#gallery">${picture.name}</a></h5>
-                            <p class="back-picture pb-2"><a href="#gallery">$${picture.price}</a></p>
+                          <div class="carousel-caption d-none d-md-block">
+                            <h5 class="back-picture pt-2">${picture.name}</h5>
+                            <p class="back-picture pb-2">$${picture.price}</p>
+                            <div class="btn-group m-2">
+                             <button class="btn btn-outline-secondary dropdown mt-2 mx-4" type="button"><a href="#gallery"> Comprar </a></button>
+                            </div>
                           </div>
                         </div>`;
             active = "";
