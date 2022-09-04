@@ -64,10 +64,28 @@ a:link {
   a:hover {
     color: #FFF;
   }
+  .footer-iconos:hover {
+    color: #3BC492;
+  }
+  .footer-iconos{
+    margin: 0%;
+    
+  }
  .back-picture{
     background-color: #FFF;
     opacity:0.6;
     margin: 0;
     color: black !important;
  }
+ 
+ @media screen and (max-width: 480px) {
+    footer {
+      flex-direction: column; }
+    .dropdow-mobile{
+        margin-top: 60px !important;
+        margin-right: 0 !important;
+        right: 20% !important;
+        width: fit-content !important;
+    }
+}
 

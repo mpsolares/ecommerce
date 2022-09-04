@@ -215,7 +215,7 @@ function  refreshCartBtn(){
                             <a href="#" id="btn-cart navbarLightDropdownMenuLink" class="d-flex nav-link dropdown" title="send to cart" role="button" data-bs-toggle="dropdown" aria-expanded="false"></a><iconify-icon icon="akar-icons:cart" height="30"></iconify-icon>  
                             <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary">${cartTotal()}</span>
                         </button>
-                        <ul class="dropdown-menu mx-4 px-3" style="width: 750px;" aria-expanded="false" data-bs-auto-close="false" id="dropdownMenuClickableOutside">
+                        <ul class="dropdown-menu mx-4 px-3 dropdow-mobile" style="width: 750px;" aria-expanded="false" data-bs-auto-close="false" id="dropdownMenuClickableOutside">
                             ${addTableCart()}
                             <p class=" mx-4 d-flex flex-row-reverse text-align-right">Total<b class="mx-4 px-4">$${cartTotalItems()}</b></p>
                         </ul>
